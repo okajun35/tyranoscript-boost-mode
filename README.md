@@ -1,7 +1,8 @@
 # boost_mode — TyranoScript Ver6 対応 テキスト高速表示プラグイン
 
-旧サイト `studio-overdrive.com` で配布されていた Studio Overdrive 製
-`boost_mode` プラグインを、TyranoScript Ver6 で動作するように移植したものです。
+かつて `studio-overdrive.com` で配布していた Studio Overdrive 製
+`boost_mode` プラグインを、作者本人が TyranoScript Ver6 で動作するように
+移植し直したものです。
 
 ## 原版との違い
 
@@ -61,13 +62,14 @@ original/                               ... 原版（Ver2.74 向け）の保存
 - 名前空間は原版同様 `sutdioOverdrive`（タイポ含む）を維持しつつ、
   修正綴り `studioOverdrive` でも参照できるエイリアスを用意しています。
 
-## クレジット
+## ライセンス
 
-- 原版: Studio Overdrive（http://studio-overdrive.com/ 、現存せず）
-- 原版ソースの参照元（第三者公開リポジトリ）:
+MIT License（LICENSE 参照）
+
+本プラグインは Studio Overdrive が制作・配布した `boost_mode` を、
+当時の代表者本人が TyranoScript Ver6 対応に移植したものです。
+`original/` には当時の配布ソース（第三者リポジトリに残っていたもの）を保存しています。
+
+- 原版ソースの参照元:
   - https://github.com/fumibako/script/blob/d1f09ea2cceedb3b456d84179ee3c3293e7ea394/play/data/scenario/boost_mode/boost_mode.ks
   - https://github.com/fumibako/script/blob/d1f09ea2cceedb3b456d84179ee3c3293e7ea394/play/data/others/boost_mode/boost_mode.js
-
-原版のライセンス条項は確認できていません。本移植版は原版へのクレジットを
-残したうえで、Ver6 向けに実装を全面的に書き換えた派生物です。
-再配布・商用利用の際は原版の権利関係にご注意ください。
