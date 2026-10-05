@@ -9,6 +9,10 @@
 ;   [boost_mode_on]……テキストを一括描画ON
 ;   [boost_mode_off]……テキストを一括描画OFF(1文毎描画)
 ;
+;   ＜オプション＞
+;   [boost_mode_click_on]……表示中クリックで残りを一括表示(Ver5相当)
+;   [boost_mode_click_off]…表示中クリックは本家の高速表示(Ver6既定)
+;
 ; ＜注意点＞
 ;   本版は TyranoScript Ver6 向けに書き換えられています。
 ;   エンジン本体のファイルは変更せず、data/others/boost_mode/boost_mode.js が
@@ -25,6 +29,18 @@ sutdioOverdrive.tyrano.kag.stat.is_boost_mode = true;
 [macro name="boost_mode_off"]
 [iscript]
 sutdioOverdrive.tyrano.kag.stat.is_boost_mode = false;
+[endscript]
+[endmacro]
+
+[macro name="boost_mode_click_on"]
+[iscript]
+sutdioOverdrive.tyrano.kag.stat.is_boost_mode_click = true;
+[endscript]
+[endmacro]
+
+[macro name="boost_mode_click_off"]
+[iscript]
+sutdioOverdrive.tyrano.kag.stat.is_boost_mode_click = false;
 [endscript]
 [endmacro]
 [return]

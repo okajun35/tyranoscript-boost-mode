@@ -31,6 +31,9 @@ if (sutdioOverdrive.tyrano.kag.stat === undefined) {
 if (sutdioOverdrive.tyrano.kag.stat.is_boost_mode === undefined) {
     sutdioOverdrive.tyrano.kag.stat.is_boost_mode = false;
 }
+if (sutdioOverdrive.tyrano.kag.stat.is_boost_mode_click === undefined) {
+    sutdioOverdrive.tyrano.kag.stat.is_boost_mode_click = false;
+}
 
 // 旧版の名前空間は "sutdioOverdrive"（タイポ）だが、
 // 修正版の綴りで参照するシナリオ側コードにも対応できるようエイリアスを用意
@@ -115,5 +118,38 @@ if (typeof studioOverdrive === "undefined") {
         setTimeout(function () {
             that.finishAddingChars();
         }, 0);
+    };
+
+    // ---- オプション: 表示中クリックで残りを一括表示（Ver5 相当の挙動）----
+    //
+    // 本家は表示中クリック時に checkClickInterrupt が tmp.ch_speed を
+    // ch_speed_in_click（既定 1ms）へ書き換え、残り文字が高速逐次表示
+    // される「マッハ表示」になる。Ver5 系はクリック時点で
+    // makeAllCharsVisible + finishAddingChars を即実行してループごと
+    // 終了していた。
+    // is_boost_mode_click が有効な場合は Ver5 と同じく、クリック検出で
+    // 全文字を可視化して即 finishAddingChars し、以後の再帰呼び出しを
+    // 行わない（ループの空回りが残らない）。
+    // フラグ OFF 時とスキップ中は本家の処理に委譲する。
+    var original_addOneChar = text_tag.addOneChar;
+
+    text_tag.addOneChar = function (char_index, j_char_span_children, j_message_span, j_msg_inner) {
+        var stat = this.kag.stat;
+        var tmp = this.kag.tmp;
+
+        if (
+            sutdioOverdrive.tyrano.kag.stat.is_boost_mode_click === true &&
+            stat.is_click_text &&
+            !tmp.processed_click_interrupt
+        ) {
+            tmp.processed_click_interrupt = true;
+            if (tmp.popopo.key) {
+                tmp.popopo.player.stop();
+            }
+            this.makeAllCharsVisible(j_char_span_children);
+            this.finishAddingChars();
+            return;
+        }
+        return original_addOneChar.apply(this, arguments);
     };
 })();
